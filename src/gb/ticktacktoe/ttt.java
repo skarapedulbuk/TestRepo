@@ -26,7 +26,7 @@ public class ttt {
         Scanner scanner =  new Scanner(System.in);
         int fieldSize;
         do {
-            System.out.println("Please enter field size");
+            System.out.println("Введите размер поля");
             fieldSize = scanner.nextInt();
         } while (fieldSize <= 0);
         char[][] field = createField(fieldSize);
@@ -37,21 +37,21 @@ public class ttt {
             drawField(field);
             //         System.out.println("Your last move: " + (lastMove[0]+1) + " " + (lastMove[1]+1));
             if (isWin(field, lastPlayerMove,'X')) {
-                System.out.println("Congrats!!! You are winner :)");
+                System.out.println("Поздравляю, ты победил!");
                 break;
             }
             if (isDraw(field)) {
-                System.out.println("This is draw.");
+                System.out.println("Ничья после твоего хода");
                 break;
             }
             lastAIMove = doAIMove(field, lastPlayerMove);
             drawField(field);
             if (isWin(field, lastAIMove,'O')) {
-                System.out.println("Sorry!!! You are looser :(");
+                System.out.println("Ты проиграл!!! Я победил! Ура!");
                 break;
             }
             if (isDraw(field)) {
-                System.out.println("This is draw.");
+                System.out.println("Ничья после моего хода");
                 break;
             }
         } while (true);
