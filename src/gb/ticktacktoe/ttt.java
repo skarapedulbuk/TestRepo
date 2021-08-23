@@ -166,10 +166,10 @@ public class ttt {
         }
         return counter;
     }
-    static int countHH(char[][] field, int[] turn, char symbol) {
-        return (int) IntStream.range(0, field.length).filter(i -> isXOCell(field, i, turn[1], symbol)).count();
-    }
-    static int countV(char[][] field, int[] turn, char symbol) {
+    //    static int countHH(char[][] field, int[] turn, char symbol) {
+    //    return (int) IntStream.range(0, field.length).filter(i -> isXOCell(field, i, turn[1], symbol)).count();
+    //}
+    static int countV(char[][] field, int[] turn, char symbol) { // Использование лямбда выражений
         return (int) IntStream.range(0, field.length).filter(i -> isXOCell(field, turn[0], i, symbol)).count();
     }
 
