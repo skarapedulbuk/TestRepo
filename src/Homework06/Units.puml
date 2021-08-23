@@ -1,0 +1,12 @@
+@startuml
+
+class Pet {
+    + run(distance): void
+    + swim(distance): void
+}
+class Cat extends Pet {
+}
+class Dog extends Pet {
+}
+
+@enduml
