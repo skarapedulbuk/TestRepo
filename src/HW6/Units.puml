@@ -1,6 +1,7 @@
 @startuml
 
 class Pet {
+    - id: String
     + run(distance): void
     + swim(distance): void
 }
