@@ -7,13 +7,18 @@ public class Plate {
         this.food = food;
     }
 
+    public int getFood(){
+        return food;
+    }
     public void info() {
-        System.out.println("Plate: " + food);
+        System.out.println("Остаток корма в миске: " + food);
     }
 
     public void decreaseFood(int n) {
         food -= n;
-
+    }
+    public void increaseFood(int n) {
+        food += n;
     }
 }
 
