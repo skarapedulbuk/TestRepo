@@ -14,5 +14,18 @@ TODO * У препятствий есть длина (для дорожки) и�
 public class Main {
     public static void main(String[] args) {
         System.out.println("=HW8=");
+        Competitor[] units = {
+                new Cat(5,2),
+                new Cat(4,1)
+        };
+        printList(units);
+    }
+
+    public static void printList (Competitor[] units) {
+        for (Competitor unit: units
+             ) {
+            System.out.println(unit.toString());
+            System.out.println(unit.getMaxRun());
+        }
     }
 }
