@@ -7,6 +7,10 @@ public class Route implements Barrier {
         this.distance = distance;
     }
 
+    public int getDistance() {
+        return distance;
+    }
+
     @Override
     public boolean isRunnable(int maxRun) {
         return maxRun >= distance;
@@ -20,9 +24,5 @@ public class Route implements Barrier {
     @Override
     public String toString() {
         return "Бег на дистанцию " + getDistance() + " м";
-    }
-
-    private int getDistance() {
-        return distance;
     }
 }

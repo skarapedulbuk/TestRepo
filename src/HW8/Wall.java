@@ -7,13 +7,13 @@ public class Wall implements Barrier {
         this.height = height;
     }
 
+    public int getHeight() {
+        return height;
+    }
+
     @Override
     public String toString() {
         return "Прыжок на высоту " + getHeight() + " м";
-    }
-
-    private int getHeight() {
-        return height;
     }
 
     @Override
