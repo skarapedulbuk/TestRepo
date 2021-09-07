@@ -1,0 +1,77 @@
+@startuml
+interface HW8.Competitor {
+~ int getMaxRun()
+~ int getMaxJump()
+~ void run()
+~ void jump()
+}
+class HW8.Human {
+- {static} int count
+- int id
+- int maxRun
+- int maxJump
++ int getId()
++ String toString()
++ int getMaxRun()
++ int getMaxJump()
++ void run()
++ void jump()
+}
+class HW8.Robot {
+- {static} int count
+- int id
+- int maxRun
+- int maxJump
++ int getId()
++ String toString()
++ int getMaxRun()
++ int getMaxJump()
++ void run()
++ void jump()
+}
+class HW8.Route {
+- int distance
+- int getDistance()
++ boolean isRunnable(int)
++ boolean isJumpable(int)
++ String toString()
+}
+class HW8.Wall {
+- int height
+- int getHeight()
++ boolean isRunnable(int)
++ boolean isJumpable(int)
++ String toString()
+}
+
+class HW8.Cat {
+- {static} int count
+- int id
+- int maxRun
+- int maxJump
++ int getId()
++ String toString()
++ int getMaxRun()
++ int getMaxJump()
++ void run()
++ void jump()
+}
+class HW8.Main {
++ {static} void main(String[])
++ {static} Barrier[] generateSomeBarriers()
++ {static} Competitor[] generateSomeUnits()
++ {static} void printList(Competitor[])
++ {static} boolean tryToPass(Competitor,Barrier[])
+}
+interface HW8.Barrier {
+~ boolean isRunnable(int)
+~ boolean isJumpable(int)
+}
+
+
+HW8.Competitor <|.. HW8.Human
+HW8.Competitor <|.. HW8.Robot
+HW8.Barrier <|.. HW8.Route
+HW8.Barrier <|.. HW8.Wall
+HW8.Competitor <|.. HW8.Cat
+@enduml
