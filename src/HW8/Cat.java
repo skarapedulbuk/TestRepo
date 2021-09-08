@@ -1,6 +1,6 @@
 package HW8;
 
-public class Cat implements Competitor {
+public class Cat implements Competitor, Comparable {
     private static int count;
     private int id;
     private final int maxRun;
@@ -40,6 +40,11 @@ public class Cat implements Competitor {
     @Override
     public void jump() {
         System.out.println("Кошка прыгает...");
+    }
+
+    @Override
+    public int compareTo(Object o) {
+        return 0;
     }
 
     /*public void run1(int distance) {
