@@ -44,8 +44,11 @@ public class Main {
     }
 
     public static void calculateSumm(String[][] array) throws MyArraySizeException, MyArrayDataException {
-        if (array.length != 4 || array[0].length != 4) {
-            throw new MyArraySizeException("Ошибка размера массива");
+        for (String[] strings : array) {
+            if (array.length != 4 || strings.length != 4) {
+                throw new MyArraySizeException("Ошибка размера массива");
+            }
+
         }
         int sum = 0;
         for (int i = 0; i < array.length; i++) {
@@ -53,16 +56,16 @@ public class Main {
                 try {
                     sum += Integer.parseInt(array[i][j]);
                 } catch (NumberFormatException exception) {
-                    throw new MyArrayDataException("Ошибка преобразования в число в ячейке " + i + " " + j);
+                    throw new MyArrayDataException("Ошибка преобразования в число в ячейке " + i + " " + j, exception);
                 }
             }
         }
         System.out.println("Сумма всех элементов массива = " + sum);
     }
 
-    public static class MyArrayDataException extends NumberFormatException {
-        public MyArrayDataException(String message) {
-            super(message);
+    public static class MyArrayDataException extends RuntimeException {
+        public MyArrayDataException(String message, Throwable cause) {
+            super(message, cause);
         }
     }
 
