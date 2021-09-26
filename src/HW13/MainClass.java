@@ -10,39 +10,35 @@ package HW13;
 + Можно корректировать классы (в том числе конструктор машин) и добавлять объекты классов из пакета java.util.concurrent.
 */
 
+import java.util.Arrays;
 import java.util.concurrent.*;
 import java.util.concurrent.locks.*;
 
 public class MainClass {
     public static final int CARS_COUNT = 4;
-    public static final Semaphore tunnelSemaphore = new Semaphore(CARS_COUNT / 2);
     public static final CountDownLatch finishCountDown = new CountDownLatch(CARS_COUNT);
-    public static Lock finishLock = new ReentrantLock();
+    public static final Lock finishLock = new ReentrantLock();
+
 
     public static void main(String[] args) throws InterruptedException {
         Car[] cars = new Car[CARS_COUNT];
         createRandomCompetition(cars);
-        startTheRace(cars);
-        finishCountDown.await();
-        System.out.println("ВАЖНОЕ ОБЪЯВЛЕНИЕ >>> Гонка закончилась!!!");
+        startTheCompetition(cars);
     }
 
     public static void createRandomCompetition(Car[] cars) {
-        System.out.println("ВАЖНОЕ ОБЪЯВЛЕНИЕ >>> Подготовка!!! (Создание всей инфраструктуры)");
-        final CyclicBarrier prepare = new CyclicBarrier(CARS_COUNT, () -> System.out.println("Подготовка всех участников завершена"));
-
-        Race race = new Race(new Road(60), new Tunnel(tunnelSemaphore), new Road(40));
-
-        for (int i = 0; i < cars.length; i++) {
-            cars[i] = new Car(finishLock, finishCountDown, prepare, race, 20 + (int) (Math.random() * 10));
-        }
-   //     return cars;
+        final CyclicBarrier prepare = new CyclicBarrier(CARS_COUNT,
+                () -> System.out.println("ВАЖНОЕ ОБЪЯВЛЕНИЕ >>> Гонка началась!!!"));
+        final Race race = new Race(new Road(60), new Tunnel(CARS_COUNT), new Road(40));
+        Arrays.setAll(cars, i -> new Car(finishLock, finishCountDown, prepare, race, 20 + (int) (Math.random() * 10)));
     }
 
-    public static void startTheRace(Car[] cars) {
-        System.out.println("ВАЖНОЕ ОБЪЯВЛЕНИЕ >>> Гонка началась!!!");
-        for (Car car : cars) {
-            new Thread(car).start();
-        }
+    public static void startTheCompetition(Car[] cars) throws InterruptedException {
+        System.out.println("ВАЖНОЕ ОБЪЯВЛЕНИЕ >>> Подготовка!!!");
+
+        Arrays.stream(cars).forEach(car -> new Thread(car).start());
+        finishCountDown.await();
+
+        System.out.println("ВАЖНОЕ ОБЪЯВЛЕНИЕ >>> Гонка закончилась!!!");
     }
 }
